@@ -31,6 +31,7 @@ const express = require("express");
 const dotEnv = require("dotenv");
 const connectDB = require('./config/db');
 const app = express();
+const bootcamp = require("./routes/bootcampRoutes")
 
 //Local Environment Variable
 
@@ -41,13 +42,12 @@ const PORT = process.env.port || 5000;
 //Connecting to Database
 connectDB();
 
-app.get('/', (req, res) => {
-    // res.send("API with Node and Express");
-    res.status(201).json({
-        sucess: true,
-        data: data
-    })
-});
+//body Parser
+app.use(express.json());
+
+//Mounting the Routes
+app.use('/app/v1/bootcamp', bootcamp);
+
 
 const server = app.listen(PORT, () => {
     console.log("Server running on port: ", PORT);
