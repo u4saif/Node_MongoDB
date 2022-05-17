@@ -1,8 +1,8 @@
 errorHandler = (err, req, res, next) => {
     //console the error
-    console.log(err.stack);
+    //console.log(err.stack);
 
-    res.status(500).json({
+    res.status(err.statusCode).json({
         sucess: false,
         error: err.message
     })

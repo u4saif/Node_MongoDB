@@ -1,5 +1,6 @@
 const { response } = require("express");
 const BootCamp = require("../models/bootCampModel");
+const ErrorResponse = require("../utils/errorResponse.js");
 
 
 //@desc  Get all Bootcamp
@@ -31,17 +32,14 @@ exports.getBootCamp = async (req, res, next) => {
     try {
         const bootCamp = await BootCamp.findById(req.params.id);
         if (!bootCamp) {
-            return res.status(400).json({
-                sucess: true,
-                message: 'invalid ID '
-            });
+            return next(new ErrorResponse(`The resorce ID ${req.params.id} is invalid`, 401));
         }
         res.status(200).json({
             sucess: true,
             message: bootCamp
         });
     } catch (error) {
-        next(error);
+        next(new ErrorResponse(`The resorce ID ${req.params.id} doesn't exist.`, 404));
     }
 
 }
