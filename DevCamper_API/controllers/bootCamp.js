@@ -41,10 +41,7 @@ exports.getBootCamp = async (req, res, next) => {
             message: bootCamp
         });
     } catch (error) {
-        res.status(500).json({
-            sucess: true,
-            message: "error occured"
-        })
+        next(error);
     }
 
 }

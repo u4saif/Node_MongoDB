@@ -19,6 +19,7 @@
 const express = require("express");
 const dotEnv = require("dotenv");
 const connectDB = require('./config/db');
+const errorHandler = require("./middleware/error");
 const app = express();
 
 //body Parser
@@ -37,7 +38,8 @@ connectDB();
 
 //Mounting the Routes
 app.use('/app/v1/bootcamp', bootcamp);
-
+//Using Error handler 
+app.use(errorHandler);
 
 const server = app.listen(PORT, () => {
     console.log("Server running on port: ", PORT);
