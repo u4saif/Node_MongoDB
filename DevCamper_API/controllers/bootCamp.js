@@ -56,10 +56,7 @@ exports.createBootCamp = async (req, res, next) => {
             message: bootcamp
         })
     } catch (error) {
-        res.status(500).json({
-            sucess: false,
-            message: 'Something went wrong'
-        })
+        next(error);
     }
 
 }
