@@ -9,7 +9,7 @@ errorHandler = (err, req, res, next) => {
     //Custom error messages
 
     if (err.name == "CastError") {
-        const message = `The resorce ID ${req.params.id} doesn't exist.`
+        const message = `The resorce ID doesn't exist.`
         error = new ErrorResponse(message, 404);
     }
 
