@@ -7,18 +7,21 @@ const colors = require('colors');
 dotEnv.config({ path: './config/config.env' })
 //Load Model
 const BootCamp = require("./models/bootCampModel");
+const courses = require("./models/courseModel");
 
 //Connect to DB
 mongoose.connect(process.env.MONGO_URL);
 
 //Load the file
 const bootcamps = JSON.parse(fs.readFileSync(`${__dirname}/_data/bootcamps.json`, 'utf-8'));
+const coursesData = JSON.parse(fs.readFileSync(`${__dirname}/_data/courses.json`, 'utf-8'));
 
 //Import data to DB
 
 const importData = async () => {
     try {
         await BootCamp.create(bootcamps);
+        await courses.create(coursesData);
         console.log("Data imported to DB ...".green.inverse);
         process.exit();
     } catch (error) {
@@ -31,6 +34,7 @@ const importData = async () => {
 const deleteData = async () => {
     try {
         await BootCamp.deleteMany();
+        await courses.deleteMany();
         console.log("Data Deleted from DB ...".red.inverse);
         process.exit();
     } catch (error) {
