@@ -25,7 +25,9 @@ const app = express();
 //body Parser
 app.use(express.json());
 
-const bootcamp = require("./routes/bootcampRoutes")
+//Route Files
+const bootcamp = require("./routes/bootcampRoutes");
+const courses = require("./routes/coursesRoute");
 
 //Local Environment Variable
 
@@ -38,6 +40,7 @@ connectDB();
 
 //Mounting the Routes
 app.use('/app/v1/bootcamp', bootcamp);
+app.use('/app/v1/courses', courses);
 //Using Error handler 
 app.use(errorHandler);
 
