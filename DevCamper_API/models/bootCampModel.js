@@ -96,6 +96,18 @@ const BootCampSchema = new mongoose.Schema({
         type: Date,
         default: Date.now
     }
-})
+}, {
+    toJSON: { virtuals: true },
+    toObject: { virtuals: true }
 
+});
+
+//Reverse Populate with vertual
+BootCampSchema.virtual('courses', {
+    ref: 'courses',
+    localField: '_id',
+    foreignField: 'bootcamp',
+    justOne: false
+
+})
 module.exports = mongoose.model('BootCamp', BootCampSchema);
